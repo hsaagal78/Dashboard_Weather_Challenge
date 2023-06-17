@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,22 +9,79 @@
     <link rel="stylesheet" href='style.css'>
 </head>
 
-    
+
 <body>
-    
+
     <h1>Weather Dashboard</h1>
     <h2>Search for a City:</h2>
 
-   
+
+
+
     <form id='obtainForecasDate'>
-    <input type='text' id='cityName' placeholder='Search for a City:'>
-    <button id= 'submit'>Search</button>
+        <input type='text' id='cityName' placeholder='Search for a City:'>
+        <button id='submit'>Search</button>
+
     </form>
 
-    <div id='weatherRequest'></div>
-    <div id='forecastReques'></div>
+    <div id=shortCutCityName></div>
+    <h3>Atlanta</h3>
+
+
+    <div id='weatherRequest' class="weatherRequest">
+        <div class="header">
+            <h2>New Jersey</h2>
+            <p>(9/13/2022)</p>
+        </div>
+        <div class="content">
+            <img src="https://openweathermap.org/img/w/${icon}.png" alt="Weather Icon">
+            <div class="tempWindHumidity">
+                <p>Temp:63.55F</p>
+                <p>Wind Speed: ${windSpeed} m/s</p>
+                <p>Humidity: 63%</p>
+            </div>
+        </div>
+    </div>
+    <div id='forecastContender'>
+        <div id='forecastReques'>
+            <p>(9/13/2022)</p>
+            <img src="https://openweathermap.org/img/w/${icon}.png" alt="Weather Icon">
+            <p>Temp:80f</p>
+            <p>Wind Speed: ${windSpeed} m/s</p>
+            <p>Humidity: 63%</p>
+        </div>
+        <div id='forecastReques'>
+            <p>(9/13/2022)</p>
+            <img src="https://openweathermap.org/img/w/${icon}.png" alt="Weather Icon">
+            <p>Temp:80f</p>
+            <p>Wind Speed: ${windSpeed} m/s</p>
+            <p>Humidity: 63%</p>
+        </div>
+        <div id='forecastReques'>
+            <p>(9/13/2022)</p>
+            <img src="https://openweathermap.org/img/w/${icon}.png" alt="Weather Icon">
+            <p>Temp:80f</p>
+            <p>Wind Speed: ${windSpeed} m/s</p>
+            <p>Humidity: 63%</p>
+        </div>
+        <div id='forecastReques'>
+            <p>(9/13/2022)</p>
+            <img src="https://openweathermap.org/img/w/${icon}.png" alt="Weather Icon">
+            <p>Temp:80f</p>
+            <p>Wind Speed: ${windSpeed} m/s</p>
+            <p>Humidity: 63%</p>
+        </div>
+        <div id='forecastReques'>
+            <p>(9/13/2022)</p>
+            <img src="https://openweathermap.org/img/w/${icon}.png" alt="Weather Icon">
+            <p>Temp:80f</p>
+            <p>Wind Speed: ${windSpeed} m/s</p>
+            <p>Humidity: 63%</p>
+        </div>
+    </div>
 
     <script src="/script.js"></script>
-        
+
 </body>
+
 </html>
