@@ -1,94 +1,110 @@
-
-  *{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background-color: aliceblue;
-    background-size: cover;
-    max-width: 100%;
-    max-width: 100%;
+  background-color: aliceblue;
+  background-size: cover;
+  max-width: 100%;
 }
-h1{
 
-    padding: 10px;
-    background-color: rgb(72, 72, 117);
-    color:white;
-    text-align: center;
+h1 {
+  padding: 10px;
+  background-color: rgb(72, 72, 117);
+  color: white;
+  text-align: center;
 }
 
 h2 {
-    padding: 10px;
-}
-aside{
-width: 250px;
-position: relative;
-
-
-
+  padding: 10px;
 }
 
-#cityName{
-
-    padding: 5px;
-    margin: 10px;
+.container {
+  display: flex;
 }
-button, h3 {
 
-    display: block;
-    padding: 5px;
-    width: 200px;
-    margin: 8px;
-    background-color: rgb(60, 60, 194);
-    color: white;
-    text-align: center;
+aside {
+  width: 250px;
+  position: relative;
+}
+
+#cityName {
+  padding: 5px;
+  margin: 10px;
+}
+
+#weatherRequest {
+  flex: 1;
+}
+
+button,
+h3 {
+  display: block;
+  padding: 5px;
+  width: 200px;
+  margin: 8px;
+  background-color: rgb(60, 60, 194);
+  color: white;
+  text-align: center;
 }
 
 .weatherRequest {
+  align-items: center;
+  border: 1px solid black;
+  padding: 10px;
+  max-width: 1000px;
+  margin-top: 0px;
+}
 
-    /* flex-direction: column; */
-    align-items: center;
-    border: 1px solid black;
-    padding: 10px;
-    max-width: 1000px;
-    margin-top: 0px;
-  }
-  .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .content {
-    /* display: flex;
-    align-items: center; */
-    
-  }
-  
-  img {
-    margin-right: 10px;
-  }
-  
- 
-  #forecastContender {
-    display: flex;
-    position:fixed;
-    margin-left: 300px;
-    margin-top: 40px;
-    gap: 30px
-    
-    
-  }
-  
-  .forecast-request img {
-    margin-left: 10px;
-  }
-  
-  #forecastContender #forecastReques{
-    background-color: rgb(44, 44, 69);
-    border: 1px solid black;
-    
+.weatherRequest .header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
+.weatherRequest .content {
+  display: flex;
+  align-items: center;
+}
 
-  }
-  
+.weatherRequest img {
+  margin-right: 10px;
+}
+
+#forecastContender {
+  display: flex;
+  position: fixed;
+  margin-left: 300px;
+  margin-top: 40px;
+  gap: 30px;
+}
+
+#forecastContender .forecast-request img {
+  margin-left: 10px;
+}
+
+#forecastRequest1 {
+  background-color: rgb(60, 60, 194);
+  border: 1px solid black;
+}
+
+#forecastRequest2 {
+  background-color: rgb(60, 60, 194);
+  border: 1px solid black;
+}
+
+#forecastRequest3 {
+  background-color: rgb(60, 60, 194);
+  border: 1px solid black;
+}
+
+#forecastRequest4 {
+  background-color: rgb(60, 60, 194);
+  border: 1px solid black;
+}
+
+#forecastRequest5 {
+  background-color: rgb(60, 60, 194);
+  border: 1px solid black;
+}
