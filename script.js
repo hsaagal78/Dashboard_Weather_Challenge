@@ -1,5 +1,3 @@
-// var baseWeatherURL = 'https://api.openweathermap.org/data/2.5/weather?q=cityName&appid=b7697291bbd48724d3d0d47008d23e7e';
-// var baseForecastURL = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=b7697291bbd48724d3d0d47008d23e7e';
 
 var baseWeatherURL = 'https://api.openweathermap.org/data/2.5/weather?q=cityName&appid=b7697291bbd48724d3d0d47008d23e7e';
 
@@ -67,6 +65,7 @@ function displayWeatherDataOnScreen(data) {
   var descriptionElement = document.createElement('p');
     var windspeedElement = document.createElement('p');
     var humidityElement = document.createElement('p');
+    var timeZoneElement = document.createElement('p');
   
   var cityName = data.name;
   console.log(data);
@@ -74,13 +73,35 @@ function displayWeatherDataOnScreen(data) {
   var description = data.weather[0].description;
   var windSpeed = data.wind.speed;
   var humidity = data.main.humidity;
-
+  var timeZone = data.timezone;
+  var currentTime = new Date();
+  
+  // Get the current time in UTC
+  var currentUTCTime = currentTime.getTime() + (currentTime.getTimezoneOffset() * 60000);
+  
+  // Calculate the new time by adding the timeZone
+  var newTime = new Date(currentUTCTime + (timeZone * 1000));
+  
+  // Get the hours and minutes in readable format
+  var hours = newTime.getHours();
+  var minutes = newTime.getMinutes();
+  var amPm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  
+  // Format the hours and minutes according to the desired format
+  var formattedTime = (hours).toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ' ' + amPm;
+  
+  // Print the formatted time
+  console.log(formattedTime);
 
   cityNameElement.textContent = cityName;
   temperatureElement.textContent = 'Temperature: ' + temperature + '°C';
   descriptionElement.textContent = 'Description: ' + description;
   windspeedElement.textContent = 'Speed Wind: ' + windSpeed + 'mph';
   humidityElement.textContent = 'Humidity: ' +  humidity + '%';
+  timeZoneElement.textContent = formattedTime;
+  
 
 
   weatherContainer.innerHTML = '';
@@ -91,6 +112,7 @@ function displayWeatherDataOnScreen(data) {
   weatherContainer.appendChild(descriptionElement);
   weatherContainer.appendChild(windspeedElement);
   weatherContainer.appendChild(humidityElement);
+  weatherContainer.appendChild(timeZoneElement);
 }
 
 function fetchWeatherData(cityName) {
@@ -117,3 +139,6 @@ function displayWeatherDataFromInput(event) {
 }
 
 form.addEventListener('submit', displayWeatherDataFromInput);
+
+
+// var baseForecastURL = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=b7697291bbd48724d3d0d47008d23e7e';
