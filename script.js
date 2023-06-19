@@ -5,19 +5,71 @@ var baseForecast5daysURL = 'https://api.openweathermap.org/data/2.5/forecast?lat
 var form = document.querySelector('#obtainForecasDate');
 var cityNameInput = document.querySelector('#cityName');
 var shortCut = document.querySelector('#shortCutCityName');
+var button = document.querySelector('#errorMessage');
 var cityNames = [];
 var input = "storedCity";
 
 function searchCity(event) {
   event.preventDefault();
-
   var cityName = cityNameInput.value;
 //   console.log(cityName);
   createCityArray(cityName);
   fetchWeatherData(cityName);
-//   fiveDaysForcecast (cityName)
+ 
 }
 form.addEventListener('submit', searchCity);
+
+function fetchWeatherData(cityName) {
+  var weatherURL = baseWeatherURL.replace('cityName', cityName);
+  
+  return fetch(weatherURL)
+    .then(function (res) {
+      if(!res.ok) {
+        throw new Error('City no found')
+        
+      }
+      return res.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      return data;
+      
+    })
+    .catch(function (error) {
+      console.log('Error:', error);
+      displayErrorMessage(cityName);
+
+    });
+    
+}
+
+function displayWeatherDataFromInput() {
+    event.preventDefault();
+  var cityName = cityNameInput.value;
+  fetchWeatherData(cityName)
+    .then(function (data) {
+      console.log(data);
+      displayWeatherDataOnScreen(data);
+      fetchdaysWeatherData(data);
+      hideErrorMessage();
+      
+      
+    });
+    
+}
+
+form.addEventListener('submit', displayWeatherDataFromInput);
+
+function displayErrorMessage() {
+  var errorMessage = document.querySelector('.errorMessage');
+  errorMessage.style.display = 'block'; 
+  cityName.value = "";
+ 
+ }
+function hideErrorMessage() {
+var errorMessage = document.querySelector('.errorMessage');
+errorMessage.style.display = 'none'; 
+}
 
 function createCityArray(cityName) {
   var cityArray = {
@@ -40,58 +92,34 @@ function createCityArray(cityName) {
 }
 
 function storedCity() {
+  if (fetchdaysWeatherData(data) === null){
   localStorage.setItem(input, JSON.stringify(cityNames));
-}
+   }
+  }
+ 
 
-function showCity() {
+ function showCity() {
   var storedData = localStorage.getItem(input);
+
   if (storedData) {
     var existingCityNames = JSON.parse(storedData);
 
     for (var i = 0; i < existingCityNames.length; i++) {
       var cityName = existingCityNames[i].city;
-    
+
       var button = document.createElement('button');
       button.innerText = cityName;
       shortCut.appendChild(button);
+
+      button.addEventListener('click', function() {
+       
+        searchCity();
+        
+      });
     }
   }
 }
-
 showCity();
-////////////////////////////////////////1111111111111111111111111111111///////////////////////////////
-function fetchWeatherData(cityName) {
-    var weatherURL = baseWeatherURL.replace('cityName', cityName);
-    
-    return fetch(weatherURL)
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        return data;
-      })
-      .catch(function (error) {
-        console.log('Error:', error);
-      });
-      
-  }
-  
-  function displayWeatherDataFromInput() {
-    //   event.preventDefault();
-    var cityName = cityNameInput.value;
-    fetchWeatherData(cityName)
-      .then(function (data) {
-        console.log(data);
-        displayWeatherDataOnScreen(data);
-        fetchdaysWeatherData(data);
-        
-        
-      });
-  }
-  
-  form.addEventListener('submit', displayWeatherDataFromInput);
-////////////////////////////////////////////////////222222222222222222222222222222//////////////////////////////////////////////////
 
 
 function displayWeatherDataOnScreen(data) {
@@ -200,12 +228,6 @@ function fetchdaysWeatherData(data) {
             var timeZone = storeArray.list[i - 1].dt_txt;
             var variable = weatherContainer;
 
-// Comprobando si la variable es null
-if (variable === null) {
-  console.log("La variable es null");
-} else {
-  console.log("La variable no es null");
-}
   
             temperatureElementfivedays.textContent = 'Temperature: ' + temperature + '°C';
             descriptionElementfivedays.textContent = 'Description: ' + description;

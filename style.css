@@ -37,6 +37,15 @@ aside {
 #weatherRequest {
   flex: 1;
 }
+#errorMessage{
+
+  background-color: rgb(228 13 13);
+  width: 200px;
+  position: relative;
+  margin: auto;
+  text-align: center;
+  padding: 15px;
+}
 
 button,
 h3 {
