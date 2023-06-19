@@ -75,7 +75,7 @@ h3 {
 #forecastContender {
   display: flex;
   position: fixed;
-  margin-left: 300px;
+  margin-left: 250px;
   margin-top: 40px;
   gap: 30px;
 }
@@ -85,26 +85,27 @@ h3 {
 }
 
 #forecastRequest1 {
-  background-color: rgb(60, 60, 194);
+  background-color: rgb(98, 98, 188);
   border: 1px solid black;
+  
 }
 
 #forecastRequest2 {
-  background-color: rgb(60, 60, 194);
+  background-color: rgb(98, 98, 188);
   border: 1px solid black;
 }
 
 #forecastRequest3 {
-  background-color: rgb(60, 60, 194);
+  background-color: rgb(98, 98, 188);
   border: 1px solid black;
 }
 
 #forecastRequest4 {
-  background-color: rgb(60, 60, 194);
+  background-color: rgb(98, 98, 188);
   border: 1px solid black;
 }
 
 #forecastRequest5 {
-  background-color: rgb(60, 60, 194);
+  background-color: rgb(98, 98, 188);
   border: 1px solid black;
 }

@@ -105,7 +105,7 @@ function displayWeatherDataOnScreen(data) {
   
   var cityName = data.name;
   console.log(data);
-  var temperature = Math.round(data.main.temp)
+  var temperature = Math.round((data.main.temp - 273.15)*(9/5)+32);
   var description = data.weather[0].description;
   var windSpeed = data.wind.speed;
   var humidity = data.main.humidity;
@@ -185,36 +185,41 @@ function fetchdaysWeatherData(data) {
             var storeArray = forecastData;
             console.log('one',forecastData);
        
-          for (var i = 0; i < 5; i++) {
-            var weatherContainer = document.querySelector('#forecastRequest');
+          for (var i = 1; i < 6; i++) {
+            var weatherContainer = document.querySelector('#forecastRequest'+ i);
             var temperatureElementfivedays = document.createElement('p');
             var descriptionElementfivedays = document.createElement('p');
             var humidityElementfivedays = document.createElement('p');
-            var timeZoneElement = document.createElement('p');
+            var timeZoneElementfivedays = document.createElement('p');
+            var windspeedElementfivedays = document.createElement('p');
   
-            var temperature = Math.round(forecastData.list[i].main.temp);
-            var description = forecastData.list[i].weather[0].description;
-            var windSpeed = forecastData.list[i].wind.speed;
-            var humidity = forecastData.list[i].main.humidity;
-            var timeZone = forecastData.list[i].dt_txt;
+            var temperature = Math.round((storeArray.list[i - 1].main.temp -273.15)*(9/5)+32);
+            var description = storeArray.list[i - 1].weather[0].description;
+            var windSpeed = storeArray.list[i - 1].wind.speed;
+            var humidity = storeArray.list[i - 1].main.humidity;
+            var timeZone = storeArray.list[i - 1].dt_txt;
+            var variable = weatherContainer;
+
+// Comprobando si la variable es null
+if (variable === null) {
+  console.log("La variable es null");
+} else {
+  console.log("La variable no es null");
+}
   
             temperatureElementfivedays.textContent = 'Temperature: ' + temperature + '°C';
             descriptionElementfivedays.textContent = 'Description: ' + description;
-            windspeedElement.textContent = 'Speed Wind: ' + windSpeed + 'mph';
+            windspeedElementfivedays.textContent = 'Speed Wind: ' + windSpeed + 'mph';
             humidityElementfivedays.textContent = 'Humidity: ' + humidity + '%';
-            timeZoneElement.textContent = timeZone;
+            timeZoneElementfivedays.textContent = timeZone;
   
             weatherContainer.innerHTML = '';
   
             weatherContainer.appendChild(temperatureElementfivedays);
             weatherContainer.appendChild(descriptionElementfivedays);
-            weatherContainer.appendChild(windspeedElement);
+            weatherContainer.appendChild(windspeedElementfivedays);
             weatherContainer.appendChild(humidityElementfivedays);
-            weatherContainer.appendChild(timeZoneElement);
-          }
-          .catch(function (error) {
-            console.log('Error:', error);
-        });
+            weatherContainer.appendChild(timeZoneElementfivedays);
+        }        
+
     }
-
-
