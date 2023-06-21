@@ -93,6 +93,7 @@ function displayWeatherDataOnScreen(data) {
   var humidityElement = document.createElement('p');
   var timeZoneElement = document.createElement('p');
   var windspeedElement = document.createElement('p');
+  var pictureElement = document.createElement('img');
 
   var cityName = data.name;
   var temperature = Math.round((data.main.temp - 273.15) * (9 / 5) + 32);
@@ -109,6 +110,7 @@ function displayWeatherDataOnScreen(data) {
   hours = hours % 12;
   hours = hours ? hours : 12;
   var formattedTime = (hours).toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ' ' + amPm;
+  var pictureWeather = data.weather[0].icon;
 
   cityNameElement.textContent = cityName;
   temperatureElement.textContent = 'Temperature: ' + temperature + 'F°';
@@ -116,9 +118,11 @@ function displayWeatherDataOnScreen(data) {
   windspeedElement.textContent = 'Speed Wind: ' + windSpeed + 'mph';
   humidityElement.textContent = 'Humidity: ' +  humidity + '%';
   timeZoneElement.textContent = formattedTime;
+  pictureElement.src ='https://openweathermap.org/img/wn/'+ pictureWeather +".png";
 
   weatherContainer.innerHTML = '';
 
+  weatherContainer.appendChild(pictureElement);
   weatherContainer.appendChild(cityNameElement);
   weatherContainer.appendChild(temperatureElement);
   weatherContainer.appendChild(descriptionElement);
@@ -156,21 +160,27 @@ function fiveDaysDisplayForecast(forecastData) {
     var humidityElement = document.createElement('p');
     var timeZoneElement = document.createElement('p');
     var windspeedElement = document.createElement('p');
+    var pictureElement = document.createElement('img');
 
     var temperature = Math.round((forecastData.list[i - 1].main.temp -273.15)*(9/5)+32);
     var description = forecastData.list[i - 1].weather[0].description;
     var windSpeed = forecastData.list[i - 1].wind.speed;
     var humidity = forecastData.list[i - 1].main.humidity;
     var timeZone = forecastData.list[i - 1].dt_txt;
+    var pictureWeather = forecastData.list[i - 1].weather[0].icon;
 
     temperatureElement.textContent = 'Temperature: ' + temperature + '°C';
     descriptionElement.textContent = 'Description: ' + description;
     windspeedElement.textContent = 'Speed Wind: ' + windSpeed + 'mph';
     humidityElement.textContent = 'Humidity: ' + humidity + '%';
     timeZoneElement.textContent = timeZone;
+    pictureElement.src ='https://openweathermap.org/img/wn/'+ pictureWeather +".png";
+ 
+    
 
     weatherContainer.innerHTML = '';
 
+    weatherContainer.appendChild(pictureElement);
     weatherContainer.appendChild(temperatureElement);
     weatherContainer.appendChild(descriptionElement);
     weatherContainer.appendChild(windspeedElement);
