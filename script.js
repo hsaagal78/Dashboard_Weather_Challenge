@@ -5,19 +5,11 @@ var baseForecast5daysURL = 'https://api.openweathermap.org/data/2.5/forecast?lat
 var form = document.querySelector('#obtainForecasDate');
 var cityNameInput = document.querySelector('#cityName');
 var shortCut = document.querySelector('#shortCutCityName');
-var button = document.querySelector('#errorMessage');
+var button = document.querySelector('#shortCutCityName');
 var cityNames = [];
 var input = "storedCity";
 
-function searchCity(event) {
-  event.preventDefault();
-  var cityName = cityNameInput.value;
-//   console.log(cityName);
-  createCityArray(cityName);
-  fetchWeatherData(cityName);
- 
-}
-form.addEventListener('submit', searchCity);
+
 
 function fetchWeatherData(cityName) {
   var weatherURL = baseWeatherURL.replace('cityName', cityName);
@@ -37,22 +29,25 @@ function fetchWeatherData(cityName) {
     })
     .catch(function (error) {
       console.log('Error:', error);
-      displayErrorMessage(cityName);
+      alert('City no found');
 
     });
     
 }
 
-function displayWeatherDataFromInput() {
-    event.preventDefault();
-  var cityName = cityNameInput.value;
+function displayWeatherDataFromInput(event) {
+      event.preventDefault();
+      var cityName = cityNameInput.value;
+      cityNameInput.value = "";
+      console.log(cityName);
   fetchWeatherData(cityName)
-    .then(function (data) {
+      .then(function (data) {
       console.log(data);
       displayWeatherDataOnScreen(data);
       fetchdaysWeatherData(data);
-      hideErrorMessage();
-      
+      createCityArray(cityName);
+      fetchWeatherData(cityName);
+
       
     });
     
@@ -60,21 +55,12 @@ function displayWeatherDataFromInput() {
 
 form.addEventListener('submit', displayWeatherDataFromInput);
 
-function displayErrorMessage() {
-  var errorMessage = document.querySelector('.errorMessage');
-  errorMessage.style.display = 'block'; 
-  cityName.value = "";
- 
- }
-function hideErrorMessage() {
-var errorMessage = document.querySelector('.errorMessage');
-errorMessage.style.display = 'none'; 
-}
 
 function createCityArray(cityName) {
   var cityArray = {
     city: cityName
   };
+  console.log(cityArray);
 // storege city name
   var storedData = localStorage.getItem(input);
   if (storedData) {
@@ -92,29 +78,35 @@ function createCityArray(cityName) {
 }
 
 function storedCity() {
-  if (fetchdaysWeatherData(data) === null){
+  
   localStorage.setItem(input, JSON.stringify(cityNames));
-   }
   }
- 
 
- function showCity() {
-  var storedData = localStorage.getItem(input);
+  function showCity() {
+      var storedData = localStorage.getItem(input);
 
   if (storedData) {
     var existingCityNames = JSON.parse(storedData);
-
     for (var i = 0; i < existingCityNames.length; i++) {
       var cityName = existingCityNames[i].city;
-
       var button = document.createElement('button');
       button.innerText = cityName;
+      button.setAttribute('name', cityName);
       shortCut.appendChild(button);
-
       button.addEventListener('click', function() {
-       
-        searchCity();
-        
+        var cityName = this.getAttribute('name');
+        fetchWeatherData(cityName)
+        .then(function(data){
+          displayWeatherDataOnScreen(data);
+         
+         })
+         .then(function(data){
+          fetchdaysWeatherData(data);
+         })
+         .then(function(data){
+          fiveDaysdisplayForcecast();
+         });
+  
       });
     }
   }
@@ -123,14 +115,13 @@ showCity();
 
 
 function displayWeatherDataOnScreen(data) {
-    var weatherContainer = document.querySelector('#weatherRequest');
-    var cityNameElement = document.createElement('h2');
-    var temperatureElement = document.createElement('p');
-    var descriptionElement = document.createElement('p');
-    var humidityElement = document.createElement('p');
-    var timeZoneElement = document.createElement('p');
-    var windspeedElement = document.createElement('p');
-  
+  var weatherContainer = document.querySelector('#weatherRequest');
+  var cityNameElement = document.createElement('h2');
+  var temperatureElement = document.createElement('p');
+  var descriptionElement = document.createElement('p');
+  var humidityElement = document.createElement('p');
+  var timeZoneElement = document.createElement('p');
+  var windspeedElement = document.createElement('p');
   var cityName = data.name;
   console.log(data);
   var temperature = Math.round((data.main.temp - 273.15)*(9/5)+32);
