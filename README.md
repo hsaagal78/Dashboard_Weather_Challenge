@@ -16,7 +16,7 @@ This is a web application that displays the current weather forecast and the for
 
 ## How to Use the Application
 
-1. Clone this repository to your local machine.
+1. Clone this repository to your local machine, https://github.com/hsaagal78/Dashboard_Weather_challenge
 2. Open the `index.html` file in your web browser.
 3. On the main page, enter the name of a city in the input field and click the "Get Forecast" button.
 4. The current weather forecast for the entered city will be displayed, along with the forecast for the next five days.
@@ -32,5 +32,12 @@ Contributions are welcome. If you want to improve this application or add new fe
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+# license 
+![GitHub license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
+
+This project is licensed under the Apache 2.0 license.
+
+* [License](#license)
+
+## Pictures
 ![Weather forcecast first page](./picture/Screenshot%202023-06-21%208.25.11%20AM.png)

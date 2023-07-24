@@ -1,12 +1,14 @@
+// API URLs
 var baseWeatherURL = 'https://api.openweathermap.org/data/2.5/weather?q=cityName&appid=b7697291bbd48724d3d0d47008d23e7e';
 var baseForecast5daysURL = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=b7697291bbd48724d3d0d47008d23e7e';
-
+// DOM Elements
 var form = document.querySelector('#obtainForecasDate');
 var cityNameInput = document.querySelector('#cityName');
 var shortCut = document.querySelector('#shortCutCityName');
 var cityNames = [];
 var input = "storedCity";
 
+// Function to fetch weather data from OpenWeatherMap API
 function fetchWeatherData(cityName) {
   var weatherURL = baseWeatherURL.replace('cityName', cityName);
   
@@ -23,6 +25,7 @@ function fetchWeatherData(cityName) {
     });
 }
 
+// Event listener for form submission to display weather data based on user input
 function displayWeatherDataFromInput(event) {
   event.preventDefault();
   var cityName = cityNameInput.value;
@@ -34,9 +37,9 @@ function displayWeatherDataFromInput(event) {
       createCityArray(cityName);
     });
 }
-
+// Event listener for form submission
 form.addEventListener('submit', displayWeatherDataFromInput);
-
+// Function to create an array of stored cities
 function createCityArray(cityName) {
   var cityArray = {
     city: cityName
@@ -56,11 +59,11 @@ function createCityArray(cityName) {
   cityNames.push(cityArray);
   storedCity();
 }
-
+// Function to store the city array in local storage
 function storedCity() {
   localStorage.setItem(input, JSON.stringify(cityNames));
 }
-
+// Function to display stored cities on the screen
 function showCity() {
   var storedData = localStorage.getItem(input);
 
@@ -84,7 +87,7 @@ function showCity() {
 }
 
 showCity();
-
+// Function to display weather data on the screen
 function displayWeatherDataOnScreen(data) {
   var weatherContainer = document.querySelector('#weatherRequest');
   var cityNameElement = document.createElement('h2');
@@ -94,7 +97,7 @@ function displayWeatherDataOnScreen(data) {
   var timeZoneElement = document.createElement('p');
   var windspeedElement = document.createElement('p');
   var pictureElement = document.createElement('img');
-
+// Extract data from API response
   var cityName = data.name;
   var temperature = Math.round((data.main.temp - 273.15) * (9 / 5) + 32);
   var description = data.weather[0].description;
@@ -111,7 +114,8 @@ function displayWeatherDataOnScreen(data) {
   hours = hours ? hours : 12;
   var formattedTime = (hours).toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ' ' + amPm;
   var pictureWeather = data.weather[0].icon;
-
+ 
+  // Set text content and image source
   cityNameElement.textContent = cityName;
   temperatureElement.textContent = 'Temperature: ' + temperature + 'F°';
   descriptionElement.textContent = 'Description: ' + description;
@@ -119,7 +123,8 @@ function displayWeatherDataOnScreen(data) {
   humidityElement.textContent = 'Humidity: ' +  humidity + '%';
   timeZoneElement.textContent = formattedTime;
   pictureElement.src ='https://openweathermap.org/img/wn/'+ pictureWeather +".png";
-
+  
+  // Update weather container on the screen
   weatherContainer.innerHTML = '';
 
   weatherContainer.appendChild(pictureElement);
@@ -129,9 +134,12 @@ function displayWeatherDataOnScreen(data) {
   weatherContainer.appendChild(windspeedElement);
   weatherContainer.appendChild(humidityElement);
   weatherContainer.appendChild(timeZoneElement);
-  fetchDaysWeatherData(data);
+ 
+  // Fetch and display 5 days weather forecast
+ fetchDaysWeatherData(data);
 }
 
+// Function to fetch 5 days weather forecast data from API
 function fetchDaysWeatherData(data) {
   var lat = data.coord.lat;
   var lon = data.coord.lon;
@@ -150,6 +158,7 @@ function fetchDaysWeatherData(data) {
     });
 }
 
+// Function to display 5 days weather forecast data on the screen
 function fiveDaysDisplayForecast(forecastData) {
   var forecastContainers = document.querySelectorAll('[id^="forecastRequest"]');
   
@@ -162,13 +171,14 @@ function fiveDaysDisplayForecast(forecastData) {
     var windspeedElement = document.createElement('p');
     var pictureElement = document.createElement('img');
 
+    // Extract data from API response
     var temperature = Math.round((forecastData.list[i - 1].main.temp -273.15)*(9/5)+32);
     var description = forecastData.list[i - 1].weather[0].description;
     var windSpeed = forecastData.list[i - 1].wind.speed;
     var humidity = forecastData.list[i - 1].main.humidity;
     var timeZone = forecastData.list[i - 1].dt_txt;
     var pictureWeather = forecastData.list[i - 1].weather[0].icon;
-
+// Set text content and image source
     temperatureElement.textContent = 'Temperature: ' + temperature + '°C';
     descriptionElement.textContent = 'Description: ' + description;
     windspeedElement.textContent = 'Speed Wind: ' + windSpeed + 'mph';
@@ -177,7 +187,7 @@ function fiveDaysDisplayForecast(forecastData) {
     pictureElement.src ='https://openweathermap.org/img/wn/'+ pictureWeather +".png";
  
     
-
+// Update forecast container on the screen
     weatherContainer.innerHTML = '';
 
     weatherContainer.appendChild(pictureElement);
@@ -188,3 +198,5 @@ function fiveDaysDisplayForecast(forecastData) {
     weatherContainer.appendChild(timeZoneElement);
   }
 }
+// Show stored cities on the screen
+showCity();
