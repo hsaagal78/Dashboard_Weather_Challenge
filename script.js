@@ -199,4 +199,4 @@ function fiveDaysDisplayForecast(forecastData) {
   }
 }
 // Show stored cities on the screen
-showCity();
+// showCity();
