@@ -1,4 +1,4 @@
-# Dashboard_Weather_challenge
+
 # Weather Forecast App
 
 This is a web application that displays the current weather forecast and the forecast for the next five days for a specific city.
@@ -21,6 +21,7 @@ This is a web application that displays the current weather forecast and the for
 3. On the main page, enter the name of a city in the input field and click the "Get Forecast" button.
 4. The current weather forecast for the entered city will be displayed, along with the forecast for the next five days.
 5. To view the forecast for another city, you can click on the shortcut buttons that are generated after searching for a city.
+6. https://hsaagal78.github.io/Dashboard_Weather_challenge/
 
 ## Credits
 
