@@ -35,6 +35,9 @@ function displayWeatherDataFromInput(event) {
     .then(function (data) {
       displayWeatherDataOnScreen(data);
       createCityArray(cityName);
+     
+      eachshowCity(cityName);
+      
     });
 }
 // Event listener for form submission
@@ -62,10 +65,14 @@ function createCityArray(cityName) {
 // Function to store the city array in local storage
 function storedCity() {
   localStorage.setItem(input, JSON.stringify(cityNames));
+
 }
 // Function to display stored cities on the screen
 function showCity() {
+
   var storedData = localStorage.getItem(input);
+
+  console.log(storedData);
 
   if (storedData) {
     var existingCityNames = JSON.parse(storedData);
@@ -87,6 +94,33 @@ function showCity() {
 }
 
 showCity();
+
+function eachshowCity(data) {
+
+ 
+console.log('esta es una ciudad',data);
+  // console.log(storedData);
+
+  // if (storedData) {
+  //   var existingCityNames = JSON.parse(storedData);
+  //   for (var i = 0; i < existingCityNames.length; i++) {
+  //     var cityName = existingCityNames[i].city;
+      var button = document.createElement('button');
+      button.innerText = data;
+      button.setAttribute('name', data);
+      shortCut.appendChild(button);
+  //     button.addEventListener('click', function() {
+  //       var cityName = this.getAttribute('name');
+  //       fetchWeatherData(cityName)
+  //         .then(function(data){
+  //           displayWeatherDataOnScreen(data);
+  //         });
+  //     });
+  //   }
+  // }
+}
+
+
 // Function to display weather data on the screen
 function displayWeatherDataOnScreen(data) {
   var weatherContainer = document.querySelector('#weatherRequest');
@@ -197,6 +231,5 @@ function fiveDaysDisplayForecast(forecastData) {
     weatherContainer.appendChild(humidityElement);
     weatherContainer.appendChild(timeZoneElement);
   }
+ 
 }
-// Show stored cities on the screen
-// showCity();
