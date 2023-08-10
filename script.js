@@ -96,28 +96,11 @@ function showCity() {
 showCity();
 
 function eachshowCity(data) {
-
- 
-console.log('esta es una ciudad',data);
-  // console.log(storedData);
-
-  // if (storedData) {
-  //   var existingCityNames = JSON.parse(storedData);
-  //   for (var i = 0; i < existingCityNames.length; i++) {
-  //     var cityName = existingCityNames[i].city;
       var button = document.createElement('button');
       button.innerText = data;
       button.setAttribute('name', data);
       shortCut.appendChild(button);
-  //     button.addEventListener('click', function() {
-  //       var cityName = this.getAttribute('name');
-  //       fetchWeatherData(cityName)
-  //         .then(function(data){
-  //           displayWeatherDataOnScreen(data);
-  //         });
-  //     });
-  //   }
-  // }
+
 }
 
 

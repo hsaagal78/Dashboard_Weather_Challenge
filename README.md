@@ -41,4 +41,4 @@ This project is licensed under the Apache 2.0 license.
 * [License](#license)
 
 ## Pictures
-![Weather forcecast first page](./lb/images/Screenshot%202023-06-21%208.25.11%20AM.png)
+![Weather forcecast first page](./assets/images/Screenshot%202023-06-21%208.25.11%20AM.png)
